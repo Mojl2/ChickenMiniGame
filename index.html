@@ -102,9 +102,14 @@
     }
   </style>
 </head>
+<!-- ...nechávame pôvodný <head> a štýly... -->
 <body>
   <h1>Hra Chicken</h1>
   <div id="balance">Tvoj zostatok: 10 €</div>
+
+  <!-- NOVÉ TLAČIDLO -->
+  <button onclick="addMoney()">Pridať 10 EUR</button>
+
   <div class="controls">
     <label>Stávka: <input type="number" id="bet" value="1" min="1"></label>
     <label>Kosti (1-24): <input type="number" id="bones" value="5" min="1" max="24"></label>
@@ -129,6 +134,11 @@
 
     function updateBalance() {
       document.getElementById("balance").innerText = `Tvoj zostatok: ${balance.toFixed(2)} €`;
+    }
+
+    function addMoney() {
+      balance += 10;
+      updateBalance();
     }
 
     function startGame() {
@@ -217,19 +227,19 @@
       const winnings = currentBet * multiplier;
       balance += winnings;
       updateBalance();
-      document.getElementById("message").innerText = `Vybral si ${winnings.toFixed(2)} €.`;
+      document.getElementById("message").innerText = `Vybral si ${winnings.toFixed(2)} €.`;  
       gameStarted = false;
       document.getElementById('cashOutBtn').style.display = 'none';
     }
 
     function revealMap() {
       const mapWindow = window.open("", "Mapa", "width=400,height=400");
-      let html = '<html><head><title>Mapa</title></head><body style="background:#0d1117;color:white;"><h2>Kde sú kura a kosti</h2><div style="display:grid;grid-template-columns:repeat(5,75px);grid-gap:10px;">';
+      let html = '<html><head><title>Mapa</title></head><body><h2>Kde sú kura a kosti</h2><div style="display:grid;grid-template-columns:repeat(5,60px);grid-gap:10px;">';
       for (let i = 0; i < gridSize; i++) {
         if (bonePositions.includes(i)) {
-          html += '<div style="width:75px;height:75px;border-radius:50%;background:#21262d;"><img src="images/bone.png" style="width:100%;height:100%;border-radius:50%"></div>';
+          html += '<div style="width:60px;height:60px;border:1px solid #ccc;"><img src="images/bone1.png" style="width:100%;height:100%"></div>';
         } else {
-          html += '<div style="width:75px;height:75px;border-radius:50%;background:#21262d;"><img src="images/chicken.png" style="width:100%;height:100%;border-radius:50%"></div>';
+          html += '<div style="width:60px;height:60px;border:1px solid #ccc;"><img src="images/chicken1.png" style="width:100%;height:100%"></div>';
         }
       }
       html += '</div></body></html>';
@@ -240,3 +250,4 @@
   </script>
 </body>
 </html>
+
